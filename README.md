@@ -1,7 +1,7 @@
 # raycast_sdl3
 This is a simple raycasting program written in C with raycast_sdl3
 
-![screenshot](assets/screenshot.png)
+![screenshot](assets/screen.png)
 
 ### Controls
 - Use UP/DOWN arrow keys to move player backwards and forwards
