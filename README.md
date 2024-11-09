@@ -17,14 +17,19 @@ This is a simple raycasting program written in C with raycast_sdl3
 
 ### Customizing the code 
 - Resolution
+
 To change the resolution of the game, change the STEPS constant in lib/start.h
 You may experience a drop in framerate if the STEPS constant is set too high.
 You can fix this by reducing STEPS or by removing floor and/or ceiling rendering in lib/cast.h.
 The screenshot above was taken when STEPS = 400, but STEPS = 200 by default.
+
 - Textures
+
 If you'd like to experiment with different textures for walls and sprites, you can edit the .bmp files
 in the assets folder, or include different files by changing the path of the textures in lib/draw.h.
+
 - Board size
+
 If you'd like a bigger board, change the BW and BH constants in lib/start.h. Make sure BW = BH.
 
 ### Building with makefile
