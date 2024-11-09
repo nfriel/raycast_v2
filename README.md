@@ -1,5 +1,5 @@
 # raycast_sdl3
-This is a simple raycasting program written in C with raycast_sdl3
+This is a simple raycasting program written in C with SDL3
 
 ![screenshot](assets/screen.png)
 
