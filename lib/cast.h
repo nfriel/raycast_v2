@@ -245,6 +245,7 @@ void raycast(int steps)
             SDL_RenderFillRect(sRender, &dst);
         }
 
+        setColor(bRender, light);
         SDL_RenderLine(bRender, player.pos.x * board.scale, player.pos.y * board.scale, out.hit.x * board.scale, out.hit.y * board.scale);
         startAngle += stepAngle;
     }

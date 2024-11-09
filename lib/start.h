@@ -28,7 +28,7 @@
 
 #define SN 3    // Sprite number
 
-#define STEPS 200
+#define STEPS 400
 
 SDL_Window *sWindow, *bWindow;    // Screen window, board window
 SDL_Renderer *sRender, *bRender;  // Screen renderer, board renderer
