@@ -62,8 +62,8 @@ void handleKeyInput(void)
         currentType = GUY;
     }
 
-    if (player.angle > M_PI * 2) player.angle = 0;
-    if (player.angle < 0) player.angle = M_PI * 2;
+    if (player.angle > SDL_PI_D * 2) player.angle = 0;
+    if (player.angle < 0) player.angle = SDL_PI_D * 2;
 }
 
 bool handleMouseInput(void)

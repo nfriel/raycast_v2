@@ -22,7 +22,7 @@
 #define PMI 0.15  // Player move increment
 #define PTI 0.15  // Player turn increment
 
-#define ND (double)(M_PI * 0.5)   // 90 degrees in radians
+#define ND (double)(SDL_PI_D * 0.5)   // 90 degrees in radians
 #define FOV 1.1519                // 66 degrees in radians
 
 #define TS 64   // Tile size

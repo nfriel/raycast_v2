@@ -5,8 +5,9 @@
 #include "point.h"
 #include "start.h"
 
+#include <SDL3/SDL.h>
+
 #include <stdint.h>
-#include <math.h>
 
 typedef struct Cast
 {
@@ -38,10 +39,10 @@ double distances[STEPS];
 uint8_t hit(Point position, Point direction)
 {
     bool isXWhole = false;
-    if (position.x == floor(position.x)) isXWhole = true;
+    if (position.x == SDL_floor(position.x)) isXWhole = true;
 
-    int x = floor(position.x);
-    int y = floor(position.y);
+    int x = SDL_floor(position.x);
+    int y = SDL_floor(position.y);
 
     if (x < 0 || x > board.width - 1 || y < 0 || y > board.height - 1) return 1;
 
@@ -57,21 +58,21 @@ Cast cast(double angle)
 {
     Cast out;
 
-    Point rayDirection = { .x = cos(angle), .y = sin(angle) };
+    Point rayDirection = { .x = SDL_cos(angle), .y = SDL_sin(angle) };
 
     double slope = rayDirection.y / rayDirection.x;
     double intercept = (player.pos.y + rayDirection.y) - (slope * (player.pos.x + rayDirection.x)); // b = y - mx
 
     Point hitX;
-    if (rayDirection.x > 0) hitX.x = floor(player.pos.x + 1); else hitX.x = floor(player.pos.x);
+    if (rayDirection.x > 0) hitX.x = SDL_floor(player.pos.x + 1); else hitX.x = SDL_floor(player.pos.x);
     hitX.y = slope * hitX.x + intercept; // y = mx + b
 
     Point hitY;
-    if (rayDirection.y > 0) hitY.y = floor(player.pos.y + 1); else hitY.y = floor(player.pos.y);
+    if (rayDirection.y > 0) hitY.y = SDL_floor(player.pos.y + 1); else hitY.y = SDL_floor(player.pos.y);
     hitY.x = (hitY.y - intercept) / slope; // x = (y - b) / m
     
-    double deltaDistanceX = tan((M_PI / 2) - angle);
-    double deltaDistanceY = tan(angle);
+    double deltaDistanceX = SDL_tan((SDL_PI_D / 2) - angle);
+    double deltaDistanceY = SDL_tan(angle);
 
     uint8_t typeX, typeY;
 
@@ -105,14 +106,14 @@ Cast cast(double angle)
     double hitXDistance = distanceBetweenPoints(player.pos, hitX);
     double hitYDistance = distanceBetweenPoints(player.pos, hitY);
 
-    double f = cos(angle - player.angle);
+    double f = SDL_cos(angle - player.angle);
 
     if (hitXDistance < hitYDistance)
     {
         out.hit = hitX;
         out.distance = hitXDistance * f;
         out.factor = f;
-        out.index = (hitX.y - floor(hitX.y)) * TS;
+        out.index = (hitX.y - SDL_floor(hitX.y)) * TS;
         out.type = typeX;
         out.side = true;
     }
@@ -121,7 +122,7 @@ Cast cast(double angle)
         out.hit = hitY;
         out.distance = hitYDistance * f;
         out.factor = f;
-        out.index = (hitY.x - floor(hitY.x)) * TS;
+        out.index = (hitY.x - SDL_floor(hitY.x)) * TS;
         out.type = typeY;
         out.side = false;
     }
@@ -254,7 +255,7 @@ void raycast(int steps)
 
 void pang(double angle)
 {
-    printf("%f\n", angle / (M_PI / 180));
+    printf("%f\n", angle / (SDL_PI_D / 180));
 }
 
 void drawPoint(Point a)
@@ -311,14 +312,14 @@ void drawSprite(int steps)
         Point smp = subPoints(sortedSprite[i].pos, player.pos);
 
         // How much do we have to rotate the player to be 90 degrees?
-        double diff = (M_PI * 0.5) - player.angle;
+        double diff = (SDL_PI_D * 0.5) - player.angle;
 
         // Rotate around player so player is facing up
         smp = rotatePoint(smp, -diff);
         Point dirRot = rotatePoint(player.dir, -diff);
 
-        double smpA = atan2(smp.y, smp.x);
-        double smpP = atan2(dirRot.y, dirRot.x);
+        double smpA = SDL_atan2(smp.y, smp.x);
+        double smpP = SDL_atan2(dirRot.y, dirRot.x);
         double smpL = smpP - (FOV * 0.5);
 
         Point smpLPoint = unitVector(smpL);

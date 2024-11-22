@@ -1,8 +1,9 @@
 #ifndef LIB_POINT_H_
 #define LIB_POINT_H_
 
+#include <SDL3/SDL.h>
+
 #include <stdint.h>
-#include <math.h>
 
 typedef struct Point
 {
@@ -30,8 +31,8 @@ void updatePlayer(Player *player)
 {
     player->dir = (Point)
     {
-        .x = cos(player->angle),
-        .y = sin(player->angle)
+        .x = SDL_cos(player->angle),
+        .y = SDL_sin(player->angle)
     };
 }
 
@@ -47,9 +48,9 @@ Point subPoints(Point a, Point b)
 
 double distanceBetweenPoints(Point a, Point b)
 {
-    double x = fabs(b.x - a.x);
-    double y = fabs(b.y - a.y);
-    return sqrt((x * x) + (y * y));
+    double x = SDL_fabs(b.x - a.x);
+    double y = SDL_fabs(b.y - a.y);
+    return SDL_sqrt((x * x) + (y * y));
 }
 
 double distanceBetweenPointsPerp(Point a, Point b, Point c) // player, vector, hit
@@ -65,7 +66,7 @@ double distanceBetweenPointsPerp(Point a, Point b, Point c) // player, vector, h
     double B = x2 - x1;
     double C = (x1 - x2) * y1 + (y2 - y1) * x1;
 
-    double distance = fabs((A * c.x) + (B * c.y) + C) / sqrt((A * A) + (B * B));
+    double distance = SDL_fabs((A * c.x) + (B * c.y) + C) / SDL_sqrt((A * A) + (B * B));
 
     return distance;
 }
@@ -77,12 +78,12 @@ Point scalePoint(Point a, double scale)
 
 Point unitVector(double angle)
 {
-    return (Point) { .x = cos(angle), .y = sin(angle) };
+    return (Point) { .x = SDL_cos(angle), .y = SDL_sin(angle) };
 }
 
 Point normalizePoint(Point a)
 {
-    double magnitude = sqrt((a.x * a.x) + (a.y * a.y));
+    double magnitude = SDL_sqrt((a.x * a.x) + (a.y * a.y));
 
     return (Point) { .x = a.x / magnitude, .y = a.y / magnitude };
 }
@@ -91,8 +92,8 @@ Point rotatePoint(Point a, double angle)
 {
     Point temp = a;
 
-    temp.x = a.x * cos(angle) + a.y * sin(angle);
-    temp.y = a.x * sin(angle) - a.y * cos(angle);
+    temp.x = a.x * SDL_cos(angle) + a.y * SDL_sin(angle);
+    temp.y = a.x * SDL_sin(angle) - a.y * SDL_cos(angle);
 
     return temp;
 }
