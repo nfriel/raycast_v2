@@ -7,6 +7,8 @@
 
 #include <SDL3/SDL.h>
 
+#include <stdint.h>
+
 enum 
 {
     FLOOR,
@@ -17,6 +19,7 @@ enum
     GUY,
     CROUCH,
     LAMP,
+    HANDS,
     TNUM
 };
 
@@ -61,6 +64,9 @@ bool loadImages(SDL_Renderer *rendererA, SDL_Renderer *rendererB, SDL_Texture **
     surface[LAMP] = SDL_LoadBMP("assets/lamp.bmp");
     if (surface[LAMP] == NULL) return error("SDL_LoadBMP lamp");
 
+    surface[HANDS] = SDL_LoadBMP("assets/hands.bmp");
+    if (surface[HANDS] == NULL) return error("SDL_LoadBMP hands");
+
     for (int i = 0; i < TNUM; i++)
     {
         textureA[i] = SDL_CreateTextureFromSurface(rendererA, surface[i]);
@@ -104,8 +110,8 @@ void drawBoard(SDL_Renderer *renderer, SDL_Texture **texture, Board board)
             {
                 .x = j * board.scale,
                 .y = i * board.scale,
-                .w = board.scale - 1,
-                .h = board.scale - 1
+                .w = board.scale,
+                .h = board.scale
             };
 
             if (!SDL_RenderTexture(renderer, texture[board.array[i][j]], NULL, &rect))
@@ -134,6 +140,11 @@ void drawPlayer(SDL_Renderer *renderer, SDL_Texture **texture, Board board, Play
 
     SDL_RenderTexture(renderer, texture[PLAYER], NULL, &pRect);
     SDL_RenderTexture(renderer, texture[EYE], NULL, &dRect);
+}
+
+void drawHands(SDL_Renderer *renderer, SDL_Texture **texture)
+{
+    SDL_RenderTexture(renderer, texture[HANDS], NULL, NULL);
 }
 
 #endif // LIB_DRAW_H_

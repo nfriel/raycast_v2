@@ -1,6 +1,7 @@
 #ifndef LIB_BOARD_H_
 #define LIB_BOARD_H_
 
+#include <stdint.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>

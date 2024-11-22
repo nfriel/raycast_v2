@@ -7,6 +7,8 @@
 
 #include <SDL3/SDL.h>
 
+#include <stdint.h>
+
 void handleKeyInput(void)
 {
     bool xHitPos, xHitNeg, yHitPos, yHitNeg;
@@ -90,6 +92,7 @@ void draw(void)
     raycast(STEPS);
     sortSprites();
     drawSprite(STEPS);
+    drawHands(sRender, sTexture);
 
     SDL_RenderPresent(bRender);
     SDL_RenderPresent(sRender);

@@ -1,6 +1,7 @@
 #ifndef LIB_POINT_H_
 #define LIB_POINT_H_
 
+#include <stdint.h>
 #include <math.h>
 
 typedef struct Point

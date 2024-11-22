@@ -5,6 +5,7 @@
 #include "point.h"
 #include "start.h"
 
+#include <stdint.h>
 #include <math.h>
 
 typedef struct Cast

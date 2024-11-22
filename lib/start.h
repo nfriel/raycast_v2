@@ -8,6 +8,7 @@
 
 #include <SDL3/SDL.h>
 
+#include <stdint.h>
 #include <stdbool.h>
 
 #define BWW 400   // Board window width
