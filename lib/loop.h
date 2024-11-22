@@ -105,6 +105,8 @@ void loop(void)
 
     while (running)
     {
+	int time = SDL_GetTicks();
+
         handleKeyInput();
         handleMouseInput();
 
@@ -124,6 +126,11 @@ void loop(void)
                 break;
             }
         }
+
+	int timeSpent = SDL_GetTicks() - time;
+	int wait = (1000 / 30) - timeSpent;
+	if (wait < 0) wait = 0;
+	SDL_Delay(wait);
     }
 }
 
