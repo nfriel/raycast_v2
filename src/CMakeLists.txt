@@ -4,6 +4,8 @@ project(raycast_sdl)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+set(C_STANDARD 18)
+
 find_package(SDL3 CONFIG REQUIRED COMPONENTS SDL3-shared)
 
 add_executable(nf_raycast main.c)
