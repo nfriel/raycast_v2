@@ -208,7 +208,7 @@ void raycast(int steps)
 
             SDL_RenderTexture(sRender, sTexture[FLOOR], &src, &fdst);
             // Comment/uncomment this line to render ceilings
-            SDL_RenderTexture(sRender, sTexture[FLOOR], &src, &cdst);
+            // SDL_RenderTexture(sRender, sTexture[FLOOR], &src, &cdst);
 
             initialAngle -= angleStep;
         }
